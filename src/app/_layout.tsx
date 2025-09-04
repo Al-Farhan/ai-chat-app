@@ -1,10 +1,10 @@
-import { Stack } from "expo-router";
 import "../../global.css";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
+import HistoryChatsDrawer from "@/components/HistoryChatsDrawer";
 export default function RootLayout() {
   const myTheme = {
     ...DarkTheme,
@@ -17,6 +17,7 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={myTheme}>
         <Drawer
+          drawerContent={HistoryChatsDrawer}
           screenOptions={{
             headerTitle: "",
             headerStyle: { backgroundColor: "black" },
@@ -34,6 +35,15 @@ export default function RootLayout() {
               drawerIcon: () => (
                 <FontAwesome5 name="atom" size={18} color="white" />
               ),
+            }}
+          />
+
+          <Drawer.Screen
+            name="chat/[id]"
+            options={{
+              drawerItemStyle: {
+                display: "none",
+              },
             }}
           />
         </Drawer>
