@@ -1,11 +1,16 @@
 import { useLocalSearchParams } from "expo-router";
 import { Text, View } from "react-native";
 import chatHistory from "@assets/data/chatHistory.json";
+import ChatInput from "@/components/ChatInput";
 
 export default function ChatScreen() {
   const { id } = useLocalSearchParams();
 
   const chat = chatHistory.find((item) => item.id === id);
+
+  const handleSend = async (message: string) => {
+    console.log("Sending message", message);
+  };
 
   if (!chat) {
     return (
@@ -17,8 +22,10 @@ export default function ChatScreen() {
   }
 
   return (
-    <View>
-      <Text className="text-white">Chat screen: {chat.title}</Text>
+    <View className="flex-1">
+      <Text className="text-white flex-1">Chat screen: {chat.title}</Text>
+
+      <ChatInput onSend={handleSend} isLoading={false} />
     </View>
   );
 }
