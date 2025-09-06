@@ -1,7 +1,8 @@
 import { useLocalSearchParams } from "expo-router";
-import { Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import chatHistory from "@assets/data/chatHistory.json";
 import ChatInput from "@/components/ChatInput";
+import MessageListItem from "@/components/MessageListItem";
 
 export default function ChatScreen() {
   const { id } = useLocalSearchParams();
@@ -23,7 +24,10 @@ export default function ChatScreen() {
 
   return (
     <View className="flex-1">
-      <Text className="text-white flex-1">Chat screen: {chat.title}</Text>
+      <FlatList
+        data={chat.messages}
+        renderItem={({ item }) => <MessageListItem messageItem={item} />}
+      />
 
       <ChatInput onSend={handleSend} isLoading={false} />
     </View>
