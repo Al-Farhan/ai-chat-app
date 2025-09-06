@@ -9,10 +9,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-type ChatInputProps = {
-  onSend: (message: string) => {};
+interface ChatInputProps {
+  onSend: (message: string) => Promise<void>;
   isLoading: boolean;
-};
+}
 
 export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
   const insets = useSafeAreaInsets();
