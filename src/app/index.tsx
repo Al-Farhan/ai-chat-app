@@ -15,6 +15,15 @@ export default function HomeScreen() {
       message: message,
     });
     router.push(`/chat/${newChatId}`);
+
+    try {
+      const response = await fetch("/api/chat");
+      const data = await response.json();
+
+      console.log(data);
+    } catch (error) {
+      console.error("Chat error:", error);
+    }
   };
   return (
     <View className="flex-1 justify-center">
